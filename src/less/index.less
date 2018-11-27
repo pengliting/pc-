@@ -1,40 +1,75 @@
 //变量区域
 @import 'reset';
 
+.common-title{
+  color:#009ee0;
+  font-size:80px;
+  line-height:0.8;
+  font-weight:bold;
+  letter-spacing:-5px;
+}
+
+.common-text{
+  color:white;
+  line-height:1.5;
+  font-size:15px;
+}
+
+.clearfix{
+  zoom: 1;
+  &::after{
+    display: block;
+    content: '';
+    clear: both;
+  }
+}
+
 #wrap{
-  height:100%;
+  position: relative;
+  height: 100%;
   #header{
     position: relative;
-    #header-main{
-      width:1180px;
-      height:80px;
-      margin:0 auto;
+    .header-main{
+      width: 1100px;
+      height: 80px;
+      margin: 0 auto;
+      //logo区域
       .logo{
         float: left;
-        margin-top:15px;
+        margin-top: 15px;
       }
-      //导航
+      .music{
+        float: left;
+        width:14px;
+        height:14px;
+        margin:50px 0 0 5px;
+        cursor: pointer;
+        background-image: url('data:image/gif;base64,R0lGODlhDgAOAJEAAAAAAP///wB8Z////yH5BAEAAAMALAAAAAAOAA4AAAIenI+pqyKMHDySybrusw8PrH2dM4omWYbomZIsq7YFADs=');
+        background-repeat: no-repeat;
+      }
+      //导航区域
       .nav{
-        float:left;
-        margin-right:50px;
+        float: right;
+        margin-top: 50px;
         li{
-          position: absolute;
+          position: relative;
           float: left;
           margin-left: 40px;
           color: #009EE0;
           &:hover{
             .down{
-              width:100%;
+              width: 100%;
             }
           }
-          .active{
+          &.active{
             .down{
-              width:100%;
+              width: 100%;
             }
+          }
           .down{
             position: absolute;
             left: 0;
-            top:0;
+            top: 0;
             width: 0;
             overflow: hidden;
             transition: width 1s;
@@ -47,45 +82,529 @@
         position: absolute;
         left: 50%;
         bottom: -11px;
+        z-index: 5;
         width: 21px;
         height: 11px;
+        background-image: url('../images/arrow.png');
+        background-repeat: no-repeat;
         transition: left 1s;
       }
     }
   }
-  .content{
+  #content{
     position: absolute;
     top: 80px;
     bottom: 0;
     left: 0;
     right: 0;
-    background: hotpink;
     overflow: hidden;
-    >ul{
+    .content-main{
+      position: absolute;
+      //解决第一次没有过渡效果问题
       top: 0;
       width: 100%;
       height: 500%;
       transition: top 1s;
-      >li {
+      will-change: top;
+      >li{
         position: relative;
         width: 100%;
         height: 20%;
-        > section {
+        background-repeat: no-repeat;
+        overflow: hidden;
+        &:nth-child(1){
+          background-image: url('../images/bg1.jpg');
+        }
+        &:nth-child(2){
+          background-image: url('../images/bg2.jpg');
+        }
+        &:nth-child(3){
+          background-image: url('../images/bg3.jpg');
+        }
+        &:nth-child(4){
+          background-image: url('../images/bg4.jpg');
+        }
+        &:nth-child(5){
+          background-image: url('../images/bg5.jpg');
+        }
+        /*display: flex;
+        justify-content: center;
+        align-items: center;*/
+        >section{
+          /*position: absolute;
+          top: 50%;
+          left: 50%;
+          margin: -260px 0 0 -550px;*/
+          /*position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          top: 0;
+          margin: auto;*/
           position: absolute;
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
           width: 1100px;
           height: 520px;
-          background: deeppink;
+          &.home{
+            .home-carousel{
+              position: relative;
+              width: 100%;
+              height: 100%;
+              transform-style: preserve-3d;
+              perspective: 1000px;
+              transition: transform 1s, opacity 1s;
+              li{
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                line-height: 520px;
+                color: #fff;
+                visibility: hidden;
+                &.show{
+                  visibility: visible;
+                }
+                &.leftHide{
+                  visibility: hidden;
+                  animation: leftHide 2s linear;
+                }
+                &.rightShow{
+                  visibility: visible;
+                  animation: rightShow 2s linear;
+                }
+                &.leftShow{
+                  visibility: visible;
+                  animation: leftShow 2s linear;
+                }
+                &.rightHide{
+                  visibility: hidden;
+                  animation: rightHide 2s linear;
+                }
+                &:nth-child(1){
+                  background:#dc6c5f;
+                }
+                &:nth-child(2){
+                  background:#95dc84;
+                }
+                &:nth-child(3){
+                  background:#64b9d2;
+                }
+                &:nth-child(4){
+                  background:#000000;
+                }
+              }
+            }
+            .home-points{
+              position: absolute;
+              bottom: 0;
+              left: 50%;
+              transform: translateX(-50%);
+              li{
+                float: left;
+                width: 20px;
+                height: 20px;
+                background-color: rgba(255,255,255,0.5);
+                margin: 2px;
+                box-shadow: 0 0 4px rgba(25,25,25,0.8);
+                border-radius: 50%;
+                &.active{
+                  background-color: rgba(255,255,255,1);
+                }
+              }
+            }
+          }
+          &.course{
+            .course-title{
+              margin: 50px;
+            }
+            .common-text{
+              width: 400px;
+              margin-left: 50px;
+            }
+            .course-photo{
+              position: absolute;
+              right: 50px;
+              top: 70px;
+              width: 480px;
+              li{
+                position: relative;
+                float: left;
+                width: 120px;
+                height: 132px;
+                &:hover{
+                  .back{
+                    transform: rotateY(360deg);
+                  }
+                  .front{
+                    transform: rotateY(180deg);
+                  }
+                }
+                .front{
+                  width: 100%;
+                  height: 100%;
+                  transition: transform 2s;
+                  background-image: url('../images/pcwelt.png');
+                  background-repeat: no-repeat;
+                  background-position: center;
+                  backface-visibility: hidden;
+                }
+                .back{
+                  position: absolute;
+                  left: 0;
+                  top: 0;
+                  width: 100%;
+                  height: 100%;
+                  box-sizing: border-box;
+                  transform: rotateY(180deg);
+                  transition: transform 2s;
+                  backface-visibility: hidden;
+                  background-color: #009ee0;
+                  padding: 15px;
+                }
+              }
+            }
+            .course-line{
+              position: absolute;
+              top: 65px;
+              z-index: 10;
+              width: 9px;
+              height: 410px;
+              background-image: url('../images/plus_row.png');
+              background-repeat: no-repeat;
+              &:nth-of-type(1){
+                right: 525px;
+              }
+              &:nth-of-type(2){
+                right: 405px;
+              }
+              &:nth-of-type(3){
+                right: 285px;
+              }
+              &:nth-of-type(4){
+                right: 165px;
+              }
+              &:nth-of-type(5){
+                right: 45px;
+              }
+            }
+            .course-plane1{
+              width:359px;
+              height:283px;
+              background:url(../images/plane1.png) no-repeat;
+              position:absolute;
+              left:300px;
+              top:-100px;
+              z-index: -1;
+              transition:1s;
+            }
+            .course-plane2{
+              width:309px;
+              height:249px;
+              background:url(../images/plane2.png) no-repeat;
+              position:absolute;
+              left:-100px;
+              top:200px;
+              z-index: -1;
+              transition:1s;
+            }
+            .course-plane3{
+              width:230px;
+              height:182px;
+              background:url(../images/plane3.png) no-repeat;
+              position:absolute;
+              left:300px;
+              top:400px;
+              z-index: -1;
+              transition:1s;
+            }
+          }
+          &.works{
+            .works-title{
+              margin: 50px 0 100px 50px;
+            }
+            .works-lists{
+              margin-left: 50px;
+              li{
+                position: relative;
+                float: left;
+                width: 220px;
+                height: 133px;
+                margin: 0 1px;
+                overflow: hidden;
+                &:last-child{
+                  width: 332px;
+                }
+                &:hover{
+                  .works-mask{
+                    opacity: 1;
+                    div{
+                      background-position: 0 -35px;
+                    }
+                  }
+                  img{
+                    transform: rotate(30deg) scale(1.5);
+                  }
+                }
+                img{
+                  transition: transform 1s;
+                }
+                .works-mask{
+                  position: absolute;
+                  left: 0;
+                  top: 0;
+                  width: 100%;
+                  height: 100%;
+                  box-sizing: border-box;
+                  background-color:rgba(25,25,25,0.8);
+                  color: white;
+                  padding: 10px;
+                  opacity: 0;
+                  transition: opacity 1s;
+                  div{
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    top: 0;
+                    bottom: 0;
+                    margin: auto;
+                    width: 32px;
+                    height: 34px;
+                    background-image: url('../images/zoomico.png');
+                    background-repeat: no-repeat;
+                    transition: background-position 1s;
+                  }
+                }
+              }
+            }
+            .works-robot{
+              position: absolute;
+              left: 900px;
+              top: 170px;
+              width: 167px;
+              height: 191px;
+              background-image: url('../images/robot.png');
+              background-repeat: no-repeat;
+              animation: robot 5s linear infinite;
+            }
+            .works-pencil1{
+              width:180px;
+              height:97px;
+              background:url(../images/pencel1.png) no-repeat;
+              position:absolute;
+              transition:transform 1s;
+              left:500px;
+              top:0;
+              z-index: -1;
+            }
+            .works-pencil2{
+              width:268px;
+              height:38px;
+              background:url(../images/pencel2.png) no-repeat;
+              position:absolute;
+              transition:transform 1s;
+              left:300px;
+              top:250px;
+              z-index: -1;
+            }
+            .works-pencil3{
+              width:441px;
+              height:231px;
+              background:url(../images/pencel3.png) no-repeat;
+              position:absolute;
+              transition:transform 1s;
+              left:650px;
+              top:300px;
+              z-index: -1;
+            }
+          }
+          &.about{
+            .about-title{
+              margin: 50px 0 100px 50px;
+            }
+            .about-text{
+              width: 400px;
+              margin-left: 50px;
+            }
+            .about-lists{
+              position: absolute;
+              width: 260px;
+              height: 200px;
+              border: 5px rgba(255,255,255,0.5) solid;
+              border-radius: 8px;
+              transition: transform 1s;
+              &:nth-of-type(1){
+                left: 750px;
+                top:50px;
+                li{
+                  background-image: url('../images/about1.jpg');
+                }
+              }
+              &:nth-of-type(2){
+                left:600px;
+                top:290px;
+                li{
+                  background-image: url('../images/about3.jpg');
+                }
+              }
+              ul{
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                &:hover{
+                  li{
+                    //下 左 右 上
+                    &:nth-child(1){
+                      background-position: 0 100px;
+                    }
+                    &:nth-child(2){
+                      background-position: -260px 0;
+                      //background-position: 100% 0;
+                    }
+                    &:nth-child(3){
+                      background-position: 130px -100px;
+                    }
+                    &:nth-child(4){
+                      background-position: -130px -200px;
+                    }
+                  }
+                }
+                li{
+                  float: left;
+                  width: 50%;
+                  height: 50%;
+                  background-repeat: no-repeat;
+                  transition: background-position 1s;
+                  &:nth-child(1){
+                    background-position: 0 0;
+                  }
+                  &:nth-child(2){
+                    background-position: -130px 0;
+                    //background-position: 100% 0;
+                  }
+                  &:nth-child(3){
+                    background-position: 0 -100px;
+                  }
+                  &:nth-child(4){
+                    background-position: -130px -100px;
+                  }
+                }
+              }
+            }
+            .about-line{
+              position: absolute;
+              right: 188px;
+              top: -13px;
+              z-index: -1;
+              width: 357px;
+              height: 998px;
+              background-image: url('../images/greenLine.png');
+              background-repeat: no-repeat;
+            }
+          }
+          &.team{
+            .team-title{
+              float: left;
+              margin: 50px;
+              width: 400px;
+              transition: transform 1s;
+            }
+            .team-text{
+              float: right;
+              width: 400px;
+              margin: 50px;
+              transition: transform 1s;
+            }
+            .team-person{
+              position: absolute;
+              top: 230px;
+              left: 50%;
+              transform: translateX(-50%);
+              width: 944px;
+              height: 448px;
+              li{
+                float: left;
+                width: 236px;
+                height: 100%;
+                background-image: url('../images/team.png');
+                background-repeat: no-repeat;
+                &:nth-child(1){
+                  background-position: 3px 0px;
+                }
+                &:nth-child(2){
+                  background-position: -230px 0px;
+                }
+                &:nth-child(3){
+                  background-position: -483px 0px;
+                }
+                &:nth-child(4){
+                  background-position: -710px 0px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .content-nav{
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      li{
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        border: 1px solid white;
+        margin-top: 10px;
+        &.active{
+          background: white;
         }
       }
     }
   }
+  #boot-animation{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    .up{
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 50%;
+      background: #009ee0;
+      transition: height 1s;
+    }
+    .down{
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 50%;
+      background: #009ee0;
+      transition: height 1s;
+    }
+    .line{
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 4px;
+      background: white;
+      transition: width 1s;
+    }
   }
 }
-
-
 /*
   隐藏元素方式：
     1. display: none
@@ -95,3 +614,42 @@
     5. transform: scale(0)
     6. position left -10000px
  */
+
+//第一屏的动画
+/*
+  点击右边小圆点：
+    左边：向左位移，旋转-30deg，从前面到后面，从显示到隐藏
+    右边：向右位移，旋转30deg，从后面到前面，从隐藏到显示
+ */
+
+@keyframes leftHide {
+  0%{visibility: visible;transform: translateZ(0)}
+  50%{transform: translateX(-40%) rotateY(30deg) scale(.8)}
+  100%{visibility: hidden;transform: translateZ(-200px);}
+}
+
+@keyframes rightShow {
+  0%{visibility: hidden;transform: translateZ(-200px);}
+  50%{transform: translateX(40%) rotateY(-30deg) scale(.8)}
+  100%{visibility: visible;transform: translateZ(0)}
+}
+
+@keyframes leftShow {
+  0%{visibility: hidden;transform: translateZ(-200px);}
+  50%{transform: translateX(-40%) rotateY(30deg) scale(.8)}
+  100%{visibility: visible;transform: translateZ(0)}
+}
+
+@keyframes rightHide {
+  0%{visibility: visible;transform: translateZ(0)}
+  50%{transform: translateX(40%) rotateY(-30deg) scale(.8)}
+  100%{visibility: hidden;transform: translateZ(-200px);}
+}
+
+//机器人运动的动画
+@keyframes robot {
+  0%{}
+  49%{transform: translateX(-400px)}
+  50%{transform: translateX(-400px) rotateY(180deg)}
+  100%{transform: rotateY(180deg)}
+}
